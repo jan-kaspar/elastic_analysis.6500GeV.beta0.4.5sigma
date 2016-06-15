@@ -43,7 +43,7 @@ void Analysis::BuildCuts()
 	ccb[5] = 1.;
 	ccc[5] = cut5_c;
 	csi[5] = cut5_si;
-	cuts.push_back(5);
+	//cuts.push_back(5);
 	
 	// a: y_L_1_F, b: y_L_1_F - y_L_1_N
 	cqaN[6] = "y^{L,1,F}"; cqbN[6] = "y^{L,1,F} - y^{L,1,N}";

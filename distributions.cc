@@ -391,10 +391,10 @@ int main(int argc, char **argv)
 	TH2D *h_y_R_1_N_vs_x_R_1_N_al_nosel = new TH2D("h_y_R_1_N_vs_x_R_1_N_al_nosel", ";x^{R,1,N};y^{R,1,N}", 150, -15., 15., 300, -30., +30.);
 	TH2D *h_y_R_1_F_vs_x_R_1_F_al_nosel = new TH2D("h_y_R_1_F_vs_x_R_1_F_al_nosel", ";x^{R,1,F};y^{R,1,F}", 150, -15., 15., 300, -30., +30.);
 
-	TH2D *h_y_L_1_N_vs_x_L_1_N_al_sel = new TH2D("h_y_L_1_N_vs_x_L_1_N_al_sel", ";x^{L,1,N};y^{L,1,N}", 150, -15., 15., 300, -30., +30.);
-	TH2D *h_y_L_1_F_vs_x_L_1_F_al_sel = new TH2D("h_y_L_1_F_vs_x_L_1_F_al_sel", ";x^{L,1,F};y^{L,1,F}", 150, -15., 15., 300, -30., +30.);
-	TH2D *h_y_R_1_N_vs_x_R_1_N_al_sel = new TH2D("h_y_R_1_N_vs_x_R_1_N_al_sel", ";x^{R,1,N};y^{R,1,N}", 150, -15., 15., 300, -30., +30.);
-	TH2D *h_y_R_1_F_vs_x_R_1_F_al_sel = new TH2D("h_y_R_1_F_vs_x_R_1_F_al_sel", ";x^{R,1,F};y^{R,1,F}", 150, -15., 15., 300, -30., +30.);
+	TH2D *h_y_L_1_N_vs_x_L_1_N_al_sel = new TH2D("h_y_L_1_N_vs_x_L_1_N_al_sel", ";x^{L,1,N};y^{L,1,N}", 50, -2., 2., 70, -7., +7.);
+	TH2D *h_y_L_1_F_vs_x_L_1_F_al_sel = new TH2D("h_y_L_1_F_vs_x_L_1_F_al_sel", ";x^{L,1,F};y^{L,1,F}", 50, -2., 2., 70, -7., +7.);
+	TH2D *h_y_R_1_N_vs_x_R_1_N_al_sel = new TH2D("h_y_R_1_N_vs_x_R_1_N_al_sel", ";x^{R,1,N};y^{R,1,N}", 50, -2., 2., 70, -7., +7.);
+	TH2D *h_y_R_1_F_vs_x_R_1_F_al_sel = new TH2D("h_y_R_1_F_vs_x_R_1_F_al_sel", ";x^{R,1,F};y^{R,1,F}", 50, -2., 2., 70, -7., +7.);
 
 	TGraph *g_y_L_1_N_vs_x_L_1_N_al_sel = new TGraph(); g_y_L_1_N_vs_x_L_1_N_al_sel->SetName("g_y_L_1_N_vs_x_L_1_N_al_sel");
 	TGraph *g_y_L_1_F_vs_x_L_1_F_al_sel = new TGraph(); g_y_L_1_F_vs_x_L_1_F_al_sel->SetName("g_y_L_1_F_vs_x_L_1_F_al_sel");
@@ -784,7 +784,12 @@ int main(int argc, char **argv)
 		}
 
 		// diagonal cut
-		bool allDiagonalRPs = (ev.h.L_1_N.v && ev.h.L_1_F.v && ev.h.R_1_N.v && ev.h.R_1_F.v);
+		bool allDiagonalRPs;
+		if (diagonal == d45b_56t)
+			allDiagonalRPs = ev.h.L_1_N.v && ev.h.L_1_F.v &&                 ev.h.R_1_F.v;
+		else 
+			allDiagonalRPs = ev.h.L_1_N.v && ev.h.L_1_F.v && ev.h.R_1_N.v && ev.h.R_1_F.v;
+
 		if (!allDiagonalRPs)
 			continue;
 		

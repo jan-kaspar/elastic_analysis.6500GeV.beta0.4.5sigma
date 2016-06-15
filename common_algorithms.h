@@ -28,9 +28,11 @@ Kinematics DoReconstruction(const HitData &h, const Environment & env)
   	double th_y_L_1_F = - h.L_1_F.y / env.L_y_L_1_F;
   	k.th_y_L = (th_y_L_1_N + th_y_L_1_F) / 2.;
   	
-	double th_y_R_1_N = + h.R_1_N.y / env.L_y_R_1_N;
+	//double th_y_R_1_N = + h.R_1_N.y / env.L_y_R_1_N;
   	double th_y_R_1_F = + h.R_1_F.y / env.L_y_R_1_F;
-  	k.th_y_R = (th_y_R_1_N + th_y_R_1_F) / 2.;
+	// TODO: decide
+  	//k.th_y_R = (th_y_R_1_N + th_y_R_1_F) / 2.;
+  	k.th_y_R = th_y_R_1_F;
 	
 	double D_y_L = - env.v_y_L_1_N * env.L_y_L_1_F + env.v_y_L_1_F * env.L_y_L_1_N;
 	//k.th_y_L = (env.v_y_L_1_N * h.L_1_F.y - env.v_y_L_1_F * h.L_1_N.y) / D_y_L;
@@ -447,24 +449,21 @@ bool IsZeroBias(unsigned int trigger, unsigned int /*run*/, unsigned int /*event
 
 //----------------------------------------------------------------------------------------------------
 
-HitData ProtonTransport(const Kinematics & /*k*/, const Environment & /*env*/)
+HitData ProtonTransport(const Kinematics & k, const Environment & env)
 {
 	HitData h;
 
-	// TODO
-	/*
-	h.x_L_F = -env.L_x_L_F*k.th_x_L + env.v_x_L_F*k.vtx_x   - env.la_x_L_F*k.th_y_L;
-	h.y_L_F = -env.L_y_L_F*k.th_y_L + env.v_y_L_F*k.vtx_y   - env.la_y_L_F*k.th_x_L;
-                                                                                  
-	h.x_L_N = -env.L_x_L_N*k.th_x_L + env.v_x_L_N*k.vtx_x   - env.la_x_L_N*k.th_y_L;
-	h.y_L_N = -env.L_y_L_N*k.th_y_L + env.v_y_L_N*k.vtx_y   - env.la_y_L_N*k.th_x_L;
-	                                                                              
-	h.x_R_N = +env.L_x_R_N*k.th_x_R + env.v_x_R_N*k.vtx_x   + env.la_x_R_N*k.th_y_R;
-	h.y_R_N = +env.L_y_R_N*k.th_y_R + env.v_y_R_N*k.vtx_y   + env.la_y_R_N*k.th_x_R;
-	                                                                              
-	h.x_R_F = +env.L_x_R_F*k.th_x_R + env.v_x_R_F*k.vtx_x   + env.la_x_R_F*k.th_y_R;
-	h.y_R_F = +env.L_y_R_F*k.th_y_R + env.v_y_R_F*k.vtx_y   + env.la_y_R_F*k.th_x_R;
-	*/
+	h.L_1_F.x = -env.L_x_L_1_F*k.th_x_L + env.v_x_L_1_F*k.vtx_x;
+	h.L_1_F.y = -env.L_y_L_1_F*k.th_y_L + env.v_y_L_1_F*k.vtx_y;
+                                                               
+	h.L_1_N.x = -env.L_x_L_1_N*k.th_x_L + env.v_x_L_1_N*k.vtx_x;
+	h.L_1_N.y = -env.L_y_L_1_N*k.th_y_L + env.v_y_L_1_N*k.vtx_y;
+	                                                           
+	h.R_1_N.x = +env.L_x_R_1_N*k.th_x_R + env.v_x_R_1_N*k.vtx_x;
+	h.R_1_N.y = +env.L_y_R_1_N*k.th_y_R + env.v_y_R_1_N*k.vtx_y;
+	                                                           
+	h.R_1_F.x = +env.L_x_R_1_F*k.th_x_R + env.v_x_R_1_F*k.vtx_x;
+	h.R_1_F.y = +env.L_y_R_1_F*k.th_y_R + env.v_y_R_1_F*k.vtx_y;
 
 	return h;
 }

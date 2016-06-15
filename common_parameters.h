@@ -4,21 +4,20 @@ void Environment::InitNominal()
 	p = p_L = p_R = 6500.;
 
 	// momentum uncertainty
-	// TODO: update
 	si_de_p = 1E-3 * p;
 
 	// angular (one-side) beam smearing (rad)
 	// TODO: update/tune
-	si_th_x_L = si_th_x_R = 1.7E-6;
-	si_th_y_L = si_th_y_R = 1.7E-6;
+	si_th_x_L = si_th_x_R = 20E-6;
+	si_th_y_L = si_th_y_R = 20E-6;
 
 	// vertex smearing (mm)
-	// TODO: update
-	si_vtx_x = si_vtx_y = 600E-3;
+	// TODO: update/tune
+	si_vtx_x = si_vtx_y = 10E-3;
 
 	// pitch-induced error (mm), later adjusted by parameters.h
-	// TODO: update
-	si_de_P_L = si_de_P_R = 13E-3;
+	// TODO: update/tune
+	si_de_P_L = si_de_P_R = 12E-3;
 
 	// optics: v_x and v_y [1], L_x and L_y [mm]
 	// sent by Frici on 12 June 2016

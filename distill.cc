@@ -145,7 +145,11 @@ int main(int argc, char **argv)
 		if (ev.h.R_1_N.v) N_R++;
 		if (ev.h.R_1_F.v) N_R++;
 
-		bool save = (N_L >= 1 && N_R >= 1);
+		// compensate for the non-working 56-210-N-T
+		if (diagonal == d45b_56t || diagonal == ad45t_56t)
+			N_R++;
+
+		bool save = (N_L >= 2 && N_R >= 2);
 		if (!save)
 			continue;
 
