@@ -11,7 +11,7 @@ void Analysis::BuildCuts()
 	ccb[1] = 1.;
 	ccc[1] = cut1_c;
 	csi[1] = cut1_si;
-	//cuts.push_back(1);
+	cuts.push_back(1);
 	
 	// a: th_y_R, b: th_y_L
 	cqaN[2] = "#theta_{y}^{R}"; cqbN[2] = "#theta_{y}^{L}";
