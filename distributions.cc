@@ -1117,8 +1117,8 @@ int main(int argc, char **argv)
 		
 		//double safe_th_y_min = (anal.th_y_lcut_L + anal.th_y_lcut_R)/2. + 5E-6;
 		//double safe_th_y_max = (anal.th_y_hcut_L + anal.th_y_hcut_R)/2. - 5E-6;
-		double safe_th_y_min = 27E-6;
-		double safe_th_y_max = 95E-6;
+		double safe_th_y_min = 0E-6;
+		double safe_th_y_max = 1000E-6;
 		bool safe = fabs(k.th_y) > safe_th_y_min && fabs(k.th_y) < safe_th_y_max;
 
 		if (safe)
