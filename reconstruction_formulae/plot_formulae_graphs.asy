@@ -50,8 +50,8 @@ void DrawSet(string iq, real scale_x, string unit, string formulae[])
 string formulae[] = {
 	"theta_x_one_arm_far_pot, th_x_L",
 	//"theta_x_one_arm_hit, th_x_L",
-	"theta_x_one_arm_angle, th_x_L",
-	//"theta_x_one_arm_regr, th_x_L",
+	//"theta_x_one_arm_angle, th_x_L",
+	"theta_x_one_arm_regr, th_x_L",
 };
 
 DrawSet("\th_x", 1e6, "\mu rad", formulae);

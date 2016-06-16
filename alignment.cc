@@ -42,6 +42,11 @@ struct result
 };
 
 //----------------------------------------------------------------------------------------------------
+
+bool fixTilt = false;
+double fixTiltValue = 0E-3;
+
+//----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 
 void DoHorizontalProfile(TGraph *g_t, TGraph *g_b,
@@ -50,7 +55,7 @@ void DoHorizontalProfile(TGraph *g_t, TGraph *g_b,
 {
 	printf(">> DoHorizontalProfile\n");
 
-	TProfile *p = new TProfile("p", ";y   (mm);mean x   (mm)", 100, -30., +30.);
+	TProfile *p = new TProfile("p", ";y   (mm);mean x   (mm)", 140, -7., +7.);
 
 	// make profile - top pot
 	for (int i = 0; i < g_t->GetN(); i++)
@@ -82,13 +87,21 @@ void DoHorizontalProfile(TGraph *g_t, TGraph *g_b,
 
 	// fit
 	TF1 *ff = new TF1("ff", "[0] + x*[1]");
+
+	if (fixTilt)
+		ff->FixParameter(1, fixTiltValue);
+
 	p->Fit(ff, "Q", "");
 	p->Write();
 
-	printf("\ta = %.2f +- %.2f mrad\n", ff->GetParameter(1)*1E3, ff->GetParError(1)*1E3);
+	double a_unc = ff->GetParError(1)*1E3;
+	if (fixTilt)
+		a_unc = 1;
+
+	printf("\ta = %.2f +- %.2f mrad\n", ff->GetParameter(1)*1E3, a_unc);
 	printf("\tb = %.1f +- %.1f um\n", ff->GetParameter(0)*1E3, ff->GetParError(0)*1E3);
 
-	results["a_p"][period] = result(ff->GetParameter(1)*1E3, ff->GetParError(1)*1E3);
+	results["a_p"][period] = result(ff->GetParameter(1)*1E3, a_unc);
 	results["b_p"][period] = result(ff->GetParameter(0)*1E3, ff->GetParError(0)*1E3);
 }
 
@@ -248,8 +261,10 @@ void DoHorizontalAlignment(TGraph *g_t, TGraph *g_b, const Analysis::AlignmentYR
 	gDirectory = baseDir->mkdir("horizontal graph fit");
 	DoHorizontalGraphFit(g_t, g_b, r.top_min, r.bot_min, r.top_max, r.bot_max, results, period);
 	
-	results["a"][period] = result::Combine(results["a_p"][period], results["a_g"][period]);
-	results["b"][period] = result::Combine(results["b_p"][period], results["b_g"][period]);
+	//results["a"][period] = result::Combine(results["a_p"][period], results["a_g"][period]);
+	//results["b"][period] = result::Combine(results["b_p"][period], results["b_g"][period]);
+	results["a"][period] = results["a_p"][period];
+	results["b"][period] = results["b_p"][period];
 }
 
 //----------------------------------------------------------------------------------------------------
@@ -283,12 +298,13 @@ void DoVerticalAlignment(TGraph *g_t, TGraph *gw_t, TGraph *g_b, TGraph *gw_b,
 {
 	printf(">> DoVerticalAlignment\n");
 
-	double bs_y_cut = 1.2;	// 3 * si_th_y * L_y_F = 3 * 1.9E-6 * 270m = 1.5 mm
+	//double bs_y_cut = 1.2;	// 3 * si_th_y * L_y_F = 3 * 1.9E-6 * 270m = 1.5 mm
+	double bs_y_cut = 0.;	// 3 * si_th_y * L_y_F = 3 * 1.9E-6 * 270m = 1.5 mm
 	printf("\tbs_y_cut = %.3f mm\n", bs_y_cut);
 
 	// prepare samples, determine ranges 
-	TH1D *y_hist = new TH1D("y_hist", "", 300, -30., +30.); y_hist->SetLineColor(4);
-	TH1D *y_hist_range = new TH1D("y_hist_range", "", 300, -30., +30.); y_hist_range->SetLineColor(2);
+	TH1D *y_hist = new TH1D("y_hist", "", 210, -7., +7.); y_hist->SetLineColor(4);
+	TH1D *y_hist_range = new TH1D("y_hist_range", "", 210, -7., +7.); y_hist_range->SetLineColor(2);
 	
 	// min and max are treated as possitive values for both top and bottom pots
 	double y_min_b = 1E100, y_min_t = 1E100;
@@ -375,8 +391,8 @@ void DoVerticalAlignment(TGraph *g_t, TGraph *gw_t, TGraph *g_b, TGraph *gw_b,
 	// determine shift range
 	double de_w = (y_max_t - y_min_t) - (y_max_b - y_min_b);
 	double s_min = min(0., de_w), s_max = max(0., de_w);
-	s_min = -2.; s_max = +2.;
-	double s_step = 0.05;
+	s_min = -1.3; s_max = +1.3;
+	double s_step = 0.02;
 	printf("\tshift range: %.2E to %.2E, shift step = %.2E\n", s_min, s_max, s_step);
 
 	// result variables
@@ -680,7 +696,7 @@ void DoVerticalAlignment(TGraph *g_t, TGraph *gw_t, TGraph *g_b, TGraph *gw_b,
 		de_y_hist_chi_sq*1E3, de_y_unc_hist_chi_sq*1E3);
 
 	// make final result
-	double center = - (de_y_min_diff + de_y_mean_diff_sq) / 2.;
+	double center = - (de_y_min_diff + de_y_hist_chi_sq) / 2.;
 	double center_unc = max(s_step, de_y_unc_hist_chi_sq);
 	printf("\tcenter:\n\t\t(%.0f +- %.0f) um\n", center*1E3, center_unc*1E3);
 
@@ -753,12 +769,10 @@ int main(int argc, char **argv)
 	char buf[1000];
 
 	vector<string> units;
+	units.push_back("L_1_N");
 	units.push_back("L_1_F");
-	units.push_back("L_2_N");
-	units.push_back("L_2_F");
+	units.push_back("R_1_N");
 	units.push_back("R_1_F");
-	units.push_back("R_2_N");
-	units.push_back("R_2_F");
 
 	// get list of periods
 	vector<signed int> periods;
@@ -811,6 +825,13 @@ int main(int argc, char **argv)
 	
 			sprintf(buf, "unit %s", units[ui].c_str());
 			TDirectory *unitDir = perDir->mkdir(buf);
+
+			fixTilt = false;
+			if (units[ui] == "R_1_N")
+			{
+				fixTilt = true;
+				fixTiltValue = 20E-3;
+			}
 			
 			gDirectory = unitDir->mkdir("horizontal");
 			DoHorizontalAlignment(g_t, g_b, r, results[units[ui]], periods[pi]);
@@ -818,27 +839,6 @@ int main(int argc, char **argv)
 			gDirectory = unitDir->mkdir("vertical");
 			DoVerticalAlignment(g_t, gw_t, g_b, gw_b, r, results[units[ui]], periods[pi]);
 		}
-	
-		/*
-		vector<string> arms;
-		arms.push_back("L");
-		arms.push_back("R");
-	
-		for (unsigned int ai = 0; ai < arms.size(); ai++) {
-			printf("\n---------- arm %s ----------\n\n", arms[ai].c_str());
-			
-			sprintf(buf, "arm %s", arms[ai].c_str());
-			TDirectory *armDir = outF->mkdir(buf);
-	
-			sprintf(buf, "hit distributions/g_y_%s_N_vs_x_%s_N_sel", arms[ai].c_str(), arms[ai].c_str()); TGraph *g_t_n = (TGraph *) inF_45b->Get(buf);
-			sprintf(buf, "hit distributions/g_y_%s_F_vs_x_%s_F_sel", arms[ai].c_str(), arms[ai].c_str()); TGraph *g_t_f = (TGraph *) inF_45b->Get(buf);
-			sprintf(buf, "hit distributions/g_y_%s_N_vs_x_%s_N_sel", arms[ai].c_str(), arms[ai].c_str()); TGraph *g_b_n = (TGraph *) inF_45t->Get(buf);
-			sprintf(buf, "hit distributions/g_y_%s_F_vs_x_%s_F_sel", arms[ai].c_str(), arms[ai].c_str()); TGraph *g_b_f = (TGraph *) inF_45t->Get(buf);
-	
-			gDirectory = armDir->mkdir("vertical rel NF");
-			DoVerticalRelNFAlignment(g_t_n, g_t_f, g_b_n, g_b_f);
-		}
-		*/
 	}
 
 

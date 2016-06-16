@@ -29,11 +29,11 @@ TGraph* WriteFitGraph(TGraph *gi, TF1 *f)
 	double x_min, ex_min, x_max, ex_max, dummy;
 	gi->GetPoint(0, x_min, dummy);
 	ex_min = gi->GetErrorX(0);
-	x_min -= 5.*ex_min;
+	x_min -= 1.*ex_min;
 
 	gi->GetPoint(gi->GetN()-1, x_max, dummy);
 	ex_max = gi->GetErrorX(gi->GetN()-1);
-	x_max += 5.*ex_max;
+	x_max += 1.*ex_max;
 
 	double x[2] = { x_min, x_max };
 	double y[2] = { f->Eval(x_min), f->Eval(x_max) };
@@ -118,12 +118,10 @@ int main(int argc, char **argv)
 	char buf[1000];
 
 	vector<string> units;
+	units.push_back("L_1_N");
 	units.push_back("L_1_F");
-	units.push_back("L_2_F");
-	units.push_back("L_2_N");
+	units.push_back("R_1_N");
 	units.push_back("R_1_F");
-	units.push_back("R_2_F");
-	units.push_back("R_2_N");
 
 	vector<GraphSet> graphs;
 

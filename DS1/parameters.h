@@ -80,14 +80,14 @@ void Init_base()
 	anal.t_min_fit = 0.027; // TODO
 #endif
 
-	anal.alignment_t0 = 16000.;		// beginning of the first time-slice
+	anal.alignment_t0 = 0.;			// beginning of the first time-slice
 	anal.alignment_ts = 60.*60.;	// time-slice in s
 	
 	// TODO
-	anal.alignmentYRanges["L_1_F"] = Analysis::AlignmentYRange(-17., -5.8, 4.4, 17.);
-	anal.alignmentYRanges["L_1_N"] = Analysis::AlignmentYRange(-17., -5.8, 4.4, 17.);
-	anal.alignmentYRanges["R_1_N"] = Analysis::AlignmentYRange(-17., -4.4, 5.2, 17.);
-	anal.alignmentYRanges["R_1_F"] = Analysis::AlignmentYRange(-17., -4.4, 5.2, 17.);
+	anal.alignmentYRanges["L_1_F"] = Analysis::AlignmentYRange(-17., -3.5, +3.9, 17.);
+	anal.alignmentYRanges["L_1_N"] = Analysis::AlignmentYRange(-17., -4.0, +4.2, 17.);
+	anal.alignmentYRanges["R_1_N"] = Analysis::AlignmentYRange(-17., -3.3, +0.0, 17.);
+	anal.alignmentYRanges["R_1_F"] = Analysis::AlignmentYRange(-17., -3.2, +4.1, 17.);
 
 #if 0
 	// TODO
@@ -106,10 +106,10 @@ void Init_base()
 void Init_45b_56t()
 {
 	// analysis settings
-	anal.cut1_a = 1.; anal.cut1_c = +2.7E-6; anal.cut1_si = 9E-6;
+	anal.cut1_a = 1.; anal.cut1_c = +90E-6; anal.cut1_si = 110E-6;
 	anal.cut2_a = 1.; anal.cut2_c = +52E-6; anal.cut2_si = 30E-6;
 
-	anal.cut3_c = 0.0; anal.cut3_si = 0.14;
+	anal.cut3_c = 0.05; anal.cut3_si = 0.12;
 	anal.cut4_c = 0.0; anal.cut4_si = 0.14;
 	
 	anal.cut5_a = -0.13; anal.cut5_c = -0.; anal.cut5_si = 0.030;
@@ -136,10 +136,10 @@ void Init_45b_56t()
 void Init_45t_56b()
 {
 	// analysis settings
-	anal.cut1_a = 1.; anal.cut1_c = +0.1E-6; anal.cut1_si = 40E-6;
+	anal.cut1_a = 1.; anal.cut1_c = +30E-6; anal.cut1_si = 110E-6;
 	anal.cut2_a = 1.; anal.cut2_c = 34E-6; anal.cut2_si = 30E-6;
 
-	anal.cut3_c = 0.0; anal.cut3_si = 0.14;
+	anal.cut3_c = 0.0; anal.cut3_si = 0.12;
 	anal.cut4_c = 0.0; anal.cut4_si = 0.14;
 
 	anal.cut5_a = -0.13; anal.cut5_c = +0.254; anal.cut5_si = 0.020;

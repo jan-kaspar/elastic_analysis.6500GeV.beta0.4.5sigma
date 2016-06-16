@@ -120,7 +120,7 @@ int main(int argc, char **argv)
 	string cutSelectionString;
 	string outputDir = ".";
 	string inputDir = ".";
-	double input_n_si = 4.0;
+	double input_n_si = 3.0;
 	int time_group_divisor = 0;
 	int time_group_remainder = 0;
 	int event_group_divisor = 0;
@@ -364,8 +364,8 @@ int main(int argc, char **argv)
 	}
 
 	// book metadata histograms
-	double timestamp_min = 16E3, timestamp_max = 26E3;
-	unsigned int timestamp_bins = 10001;	// max - min + 1
+	double timestamp_min = 0E3, timestamp_max = 20E3;
+	unsigned int timestamp_bins = 20001;	// max - min + 1
 
 	TH1D *h_timestamp_dgn = new TH1D("h_timestamp_dgn", ";timestamp;rate   (Hz)", timestamp_bins, timestamp_min-0.5, timestamp_max+0.5);
 	TH1D *h_timestamp_B0 = new TH1D("h_timestamp_B0", ";timestamp;rate   (Hz)", timestamp_bins, timestamp_min-0.5, timestamp_max+0.5);
@@ -425,8 +425,8 @@ int main(int argc, char **argv)
 
 		if (i == 1) { x_min = -600E-6; x_max = +600E-6; y_min = -600E-6; y_max = 600E-6; q_max = 600E-6; }
 		if (i == 2) { x_min = -600E-6; x_max = +600E-6; y_min = -600E-6; y_max = 600E-6; q_max = 600E-6; }
-		if (i == 3) { x_min = -1000E-6; x_max = +1000E-6; y_min = -0.3; y_max = 0.3; }
-		if (i == 4) { x_min = -1000E-6; x_max = +1000E-6; y_min = -0.3; y_max = 0.3; }
+		if (i == 3) { x_min = -1000E-6; x_max = +1000E-6; y_min = -1.; y_max = 1.; q_max = 2.; }
+		if (i == 4) { x_min = -1000E-6; x_max = +1000E-6; y_min = -1.; y_max = 1.; q_max = 2.; }
 		if (i == 5) { x_min = -6.; x_max = +6.; y_min = -1.; y_max = 1.; q_max = 500E-3; }
 		if (i == 6) { x_min = -6.; x_max = +6.; y_min = -1.; y_max = 1.; q_max = 500E-3; }
 		if (i == 7) { x_min = -600E-6; x_max = +600E-6; y_min = -0.2; y_max = +0.2; q_max = 100E-3; }

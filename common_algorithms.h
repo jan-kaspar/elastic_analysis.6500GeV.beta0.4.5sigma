@@ -11,18 +11,22 @@ Kinematics DoReconstruction(const HitData &h, const Environment & env)
 {
 	Kinematics k;
 
-	// single-arm kinematics reconstruction
-	// th_x: linear regression
-	// th_y: from hit positions
-	// vtx_x: linear regression
+	// ----- single-arm kinematics reconstruction -----
 
 	double D_x_L = - env.v_x_L_1_N * env.L_x_L_1_F + env.v_x_L_1_F * env.L_x_L_1_N;
 	k.th_x_L = (env.v_x_L_1_N * h.L_1_F.x - env.v_x_L_1_F * h.L_1_N.x) / D_x_L;
 	k.vtx_x_L = (- h.L_1_N.x * env.L_x_L_1_F + h.L_1_F.x * env.L_x_L_1_N) / D_x_L;
+	// TODO
+	//k.th_x_L = - h.L_1_F.x / env.L_x_L_1_F;
 
+	// TODO
+	/*
 	double D_x_R = + env.v_x_R_1_N * env.L_x_R_1_F - env.v_x_R_1_F * env.L_x_R_1_N;
 	k.th_x_R = (env.v_x_R_1_N * h.R_1_F.x - env.v_x_R_1_F * h.R_1_N.x) / D_x_R;
 	k.vtx_x_R = (+ h.R_1_N.x * env.L_x_R_1_F - h.R_1_F.x * env.L_x_R_1_N) / D_x_R;
+	*/
+	k.th_x_R =  h.R_1_F.x / env.L_x_R_1_F;
+	k.vtx_x_R = h.R_1_F.x / env.v_x_R_1_F;
 	
 	double th_y_L_1_N = - h.L_1_N.y / env.L_y_L_1_N;
   	double th_y_L_1_F = - h.L_1_F.y / env.L_y_L_1_F;
@@ -42,10 +46,7 @@ Kinematics DoReconstruction(const HitData &h, const Environment & env)
 	//k.th_y_R = (env.v_y_R_1_N * h.R_1_F.y - env.v_y_R_1_F * h.R_1_N.y) / D_y_R;
 	k.vtx_y_R = (+ h.R_1_N.y * env.L_y_R_1_F - h.R_1_F.y * env.L_y_R_1_N) / D_y_R;
 
-	// double-arm kinematics reconstruction
-	// th_x: from hit positions, L-R average
-	// th_y: from hit positions, L-R average
-	// vtx_x: from hit positions, L-R average
+	// ----- double-arm kinematics reconstruction -----
 	
 	k.th_x = (k.th_x_L + k.th_x_R) / 2.;
 	k.th_y = (k.th_y_L + k.th_y_R) / 2.;
@@ -53,7 +54,7 @@ Kinematics DoReconstruction(const HitData &h, const Environment & env)
 	k.vtx_x = (k.vtx_x_L + k.vtx_x_R) / 2.;
 	k.vtx_y = (k.vtx_y_L + k.vtx_y_R) / 2.;
 
-	// theta reconstruction
+	// ----- theta reconstruction -----
 	double th_sq = k.th_x*k.th_x + k.th_y*k.th_y;
 	k.th = sqrt(th_sq);
 	k.phi = atan2(k.th_y, k.th_x);
