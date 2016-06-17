@@ -1901,14 +1901,13 @@ int main(int argc, char **argv)
 		g->Write();
 	}
 
+	/*
 	gDirectory = outF->mkdir("selected - angles, alternative");
 
-	/*
 	h_ta_th_x_R->Write();
 	h_ta_th_x_L->Write();
 	h_ta_th_x->Write();
 	h_ta_x_diffLR->Write();
-	*/
 
 	h_ta_y_R->Write();
 	h_ta_y_L->Write();
@@ -1921,6 +1920,7 @@ int main(int argc, char **argv)
 	h_ta_y_vs_th_y->Write();
 	h_ta_y_L_vs_th_y_L->Write();
 	h_ta_y_R_vs_th_y_R->Write();
+	*/
 	
 	gDirectory = outF->mkdir("selected - vertex");
 	h_vtx_x->Write();

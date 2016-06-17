@@ -30,7 +30,7 @@ for (int ui : units.keys)
 {
 	NewPad("time $\ung{h}$", "tilt $\ung{mrad}$", axesAbove=false);
 	//currentpad.yTicks = RightTicks(5., 1.);
-	DrawRunBands(-4, +4);
+	//DrawRunBands(-4, +4);
 
 	for (int di : datasets.keys)
 	{
@@ -62,7 +62,7 @@ for (int ui : units.keys)
 {
 	NewPad("time $\ung{h}$", "horizontal position $\ung{\mu m}$", axesAbove=false);
 	//currentpad.yTicks = RightTicks(20., 10.);
-	DrawRunBands(-100, +100);
+	//DrawRunBands(-100, +100);
 
 	/*
 	TGraph_reducePoints = 30;
@@ -100,7 +100,7 @@ for (int ui : units.keys)
 {
 	NewPad("time $\ung{h}$", "vertical position $\ung{\mu m}$", axesAbove=false);
 	currentpad.yTicks = RightTicks(100., 20.);
-	DrawRunBands(-500, +500);
+	//DrawRunBands(-500, +500);
 
 	if (units[ui] == "R_1_N")
 		continue;
