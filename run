@@ -20,9 +20,9 @@ function PrintUsage()
 
 #----------------------------------------------------------------------------------------------------
 
-diag_45b_56t="y"
+diag_45b_56t="f"
 diag_45t_56b="y"
-diag_combined="y"
+diag_combined="f"
 
 diag_45b_56b="n"
 diag_45t_56t="n"
