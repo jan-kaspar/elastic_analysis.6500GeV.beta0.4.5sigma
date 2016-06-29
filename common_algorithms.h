@@ -16,17 +16,10 @@ Kinematics DoReconstruction(const HitData &h, const Environment & env)
 	double D_x_L = - env.v_x_L_1_N * env.L_x_L_1_F + env.v_x_L_1_F * env.L_x_L_1_N;
 	k.th_x_L = (env.v_x_L_1_N * h.L_1_F.x - env.v_x_L_1_F * h.L_1_N.x) / D_x_L;
 	k.vtx_x_L = (- h.L_1_N.x * env.L_x_L_1_F + h.L_1_F.x * env.L_x_L_1_N) / D_x_L;
-	// TODO
-	//k.th_x_L = - h.L_1_F.x / env.L_x_L_1_F;
 
-	// TODO
-	/*
 	double D_x_R = + env.v_x_R_1_N * env.L_x_R_1_F - env.v_x_R_1_F * env.L_x_R_1_N;
 	k.th_x_R = (env.v_x_R_1_N * h.R_1_F.x - env.v_x_R_1_F * h.R_1_N.x) / D_x_R;
 	k.vtx_x_R = (+ h.R_1_N.x * env.L_x_R_1_F - h.R_1_F.x * env.L_x_R_1_N) / D_x_R;
-	*/
-	k.th_x_R =  h.R_1_F.x / env.L_x_R_1_F;
-	k.vtx_x_R = h.R_1_F.x / env.v_x_R_1_F;
 	
 	k.th_y_L_N = - h.L_1_N.y / env.L_y_L_1_N;
   	k.th_y_L_F = - h.L_1_F.y / env.L_y_L_1_F;
