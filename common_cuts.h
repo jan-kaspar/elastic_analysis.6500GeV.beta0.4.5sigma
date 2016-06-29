@@ -27,7 +27,7 @@ void Analysis::BuildCuts()
 	ccb[3] = 1.;
 	ccc[3] = cut3_c;
 	csi[3] = cut3_si;
-	cuts.push_back(3);
+	//cuts.push_back(3);
 	
 	// a: th_x_L, b: vtx_x_L
 	cqaN[4] = "#theta_{x}^{L}"; cqbN[4] = "vtx_{x}^{L}";
@@ -43,7 +43,7 @@ void Analysis::BuildCuts()
 	ccb[5] = 1.;
 	ccc[5] = cut5_c;
 	csi[5] = cut5_si;
-	//cuts.push_back(5);
+	cuts.push_back(5);
 	
 	// a: y_L_1_F, b: y_L_1_F - y_L_1_N
 	cqaN[6] = "y^{L,1,F}"; cqbN[6] = "y^{L,1,F} - y^{L,1,N}";

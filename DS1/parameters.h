@@ -20,7 +20,7 @@ void Init_base()
 	keepAllBunches = true;
 
 	// alignment settings
-
+	/*
 	AlignmentSource alSrc;
 	alSrc.SetAlignmentA(atConstant);
 	alSrc.SetAlignmentB(atConstant);
@@ -33,6 +33,7 @@ void Init_base()
 	alSrc.cnst.a_R_1_F = +22E-3; alSrc.cnst.b_R_1_F = 2.41; alSrc.cnst.c_R_1_F = +500E-3;
 	
 	alignmentSources.push_back(alSrc);
+	*/
 
 	// environment settings
 	env.InitNominal();
@@ -105,6 +106,8 @@ void Init_base()
 
 void Init_45b_56t()
 {
+	// -------- UNUSED DIAGONAL ---------
+
 	// analysis settings
 	anal.cut1_a = 1.; anal.cut1_c =  -7E-6; anal.cut1_si = 110E-6;
 	anal.cut2_a = 1.; anal.cut2_c = +10E-6; anal.cut2_si = 30E-6;
@@ -137,13 +140,13 @@ void Init_45t_56b()
 {
 	// analysis settings
 	anal.cut1_a = 1.; anal.cut1_c = -20E-6; anal.cut1_si = 110E-6;
-	anal.cut2_a = 1.; anal.cut2_c = -10E-6; anal.cut2_si = 30E-6;
+	anal.cut2_a = 1.; anal.cut2_c = 0E-6; anal.cut2_si = 30E-6;
 
 	anal.cut3_c = 0.0; anal.cut3_si = 0.07;
 	anal.cut4_c = 0.0; anal.cut4_si = 0.14;
 
-	anal.cut5_a = -0.13; anal.cut5_c = +0.254; anal.cut5_si = 0.020;
-	anal.cut6_a = -0.13; anal.cut6_c = -0.03; anal.cut6_si = 0.030;
+	anal.cut5_a = -0.13; anal.cut5_c = +0.47; anal.cut5_si = 0.014;
+	anal.cut6_a = -0.115; anal.cut6_c = +0.03; anal.cut6_si = 0.030;
 
 	anal.cut7_a = 165.; anal.cut7_c = +0.002; anal.cut7_si = 0.011;
 
