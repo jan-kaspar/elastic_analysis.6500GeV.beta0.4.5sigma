@@ -453,11 +453,20 @@ int main(int argc, char **argv)
 	TProfile *p_x_vs_y_R_N_noal = new TProfile("p_x_vs_y_R_N_noal", ";y^{R,N};x^{R,N};", 50, 0., 0.);
 	TProfile *p_x_vs_y_R_F_noal = new TProfile("p_x_vs_y_R_F_noal", ";y^{R,F};x^{R,F};", 50, 0., 0.);
 
-	TH2D *h_y_L_diffFN_vs_y_L_N = new TH2D("h_y_L_diffFN_vs_y_L_N", ";y^{LN};y^{LF} - y^{LN}", 300, -30., +30., 300, -3., +3.);
-	TH2D *h_y_R_diffFN_vs_y_R_N = new TH2D("h_y_R_diffFN_vs_y_R_N", ";y^{RN};y^{RF} - y^{RN}", 300, -30., +30., 300, -3., +3.);
+	TH2D *h_x_L_diffFN_vs_x_L_N = new TH2D("h_x_L_diffFN_vs_x_L_N", ";x^{LN};x^{LF} - x^{LN}", 300, -0., +0., 300, -0., +0.);
+	TH2D *h_x_R_diffFN_vs_x_R_N = new TH2D("h_x_R_diffFN_vs_x_R_N", ";x^{RN};x^{RF} - x^{RN}", 300, -0., +0., 300, -0., +0.);
 
-	TH2D *h_y_L_ratioFN_vs_y_L_N = new TH2D("h_y_L_ratioFN_vs_y_L_N", ";y^{LN};y^{LF} / y^{LN}", 300, -30., +30., 300, 1.08, 1.14);
-	TH2D *h_y_R_ratioFN_vs_y_R_N = new TH2D("h_y_R_ratioFN_vs_y_R_N", ";y^{RN};y^{RF} / y^{RN}", 300, -30., +30., 300, 1.08, 1.14);
+	TGraph *g_x_L_diffFN_vs_x_L_N = new TGraph(); g_x_L_diffFN_vs_x_L_N->SetName("g_x_L_diffFN_vs_x_L_N"); g_x_L_diffFN_vs_x_L_N->SetTitle(";x^{LN};x^{LF} - x^{LN}");
+	TGraph *g_x_R_diffFN_vs_x_R_N = new TGraph(); g_x_R_diffFN_vs_x_R_N->SetName("g_x_R_diffFN_vs_x_R_N"); g_x_R_diffFN_vs_x_R_N->SetTitle(";x^{RN};x^{RF} - x^{RN}");
+
+	TH2D *h_y_L_diffFN_vs_y_L_N = new TH2D("h_y_L_diffFN_vs_y_L_N", ";y^{LN};y^{LF} - y^{LN}", 300, -0., +0., 300, -0., +0.);
+	TH2D *h_y_R_diffFN_vs_y_R_N = new TH2D("h_y_R_diffFN_vs_y_R_N", ";y^{RN};y^{RF} - y^{RN}", 300, -0., +0., 300, -0., +0.);
+
+	TGraph *g_y_L_diffFN_vs_y_L_N = new TGraph(); g_y_L_diffFN_vs_y_L_N->SetName("g_y_L_diffFN_vs_y_L_N"); g_y_L_diffFN_vs_y_L_N->SetTitle(";y^{LN};y^{LF} - y^{LN}");
+	TGraph *g_y_R_diffFN_vs_y_R_N = new TGraph(); g_y_R_diffFN_vs_y_R_N->SetName("g_y_R_diffFN_vs_y_R_N"); g_y_R_diffFN_vs_y_R_N->SetTitle(";y^{RN};y^{RF} - y^{RN}");
+
+	TH2D *h_y_L_ratioFN_vs_y_L_N = new TH2D("h_y_L_ratioFN_vs_y_L_N", ";y^{LN};y^{LF} / y^{LN}", 300, -0., +0., 300, 1.08, 1.14);
+	TH2D *h_y_R_ratioFN_vs_y_R_N = new TH2D("h_y_R_ratioFN_vs_y_R_N", ";y^{RN};y^{RF} / y^{RN}", 300, -0., +0., 300, 1.08, 1.14);
 
 	// book angluar histograms
 	TH1D *th_x_diffLR = new TH1D("th_x_diffLR", ";#theta_{x}^{R} - #theta_{x}^{L}", 1000, -500E-6, +500E-6); th_x_diffLR->Sumw2();
@@ -1090,13 +1099,23 @@ int main(int argc, char **argv)
 		p_x_vs_y_L_N_noal->Fill(ev.h.y_L_N, ev.h.x_L_N);
 		p_x_vs_y_R_N_noal->Fill(ev.h.y_R_N, ev.h.x_R_N);
 		p_x_vs_y_R_F_noal->Fill(ev.h.y_R_F, ev.h.x_R_F);
-
-		h_y_L_diffFN_vs_y_L_N->Fill(h_al.y_L_N, h_al.y_L_F - h_al.y_L_N);
-		h_y_R_diffFN_vs_y_R_N->Fill(h_al.y_R_N, h_al.y_R_F - h_al.y_R_N);
-
-		h_y_L_ratioFN_vs_y_L_N->Fill(h_al.y_L_N, h_al.y_L_F / h_al.y_L_N);
-		h_y_R_ratioFN_vs_y_R_N->Fill(h_al.y_R_N, h_al.y_R_F / h_al.y_R_N);
 		*/
+
+		h_x_L_diffFN_vs_x_L_N->Fill(h_al.L_1_N.x, h_al.L_1_F.x - h_al.L_1_N.x);
+		h_x_R_diffFN_vs_x_R_N->Fill(h_al.R_1_N.x, h_al.R_1_F.x - h_al.R_1_N.x);
+                            
+		h_y_L_diffFN_vs_y_L_N->Fill(h_al.L_1_N.y, h_al.L_1_F.y - h_al.L_1_N.y);
+		h_y_R_diffFN_vs_y_R_N->Fill(h_al.R_1_N.y, h_al.R_1_F.y - h_al.R_1_N.y);
+
+		{
+			int idx = g_x_L_diffFN_vs_x_L_N->GetN();
+
+			g_x_L_diffFN_vs_x_L_N->SetPoint(idx, h_al.L_1_N.x, h_al.L_1_F.x - h_al.L_1_N.x);
+			g_x_R_diffFN_vs_x_R_N->SetPoint(idx, h_al.R_1_N.x, h_al.R_1_F.x - h_al.R_1_N.x);
+
+			g_y_L_diffFN_vs_y_L_N->SetPoint(idx, h_al.L_1_N.y, h_al.L_1_F.y - h_al.L_1_N.y);
+			g_y_R_diffFN_vs_y_R_N->SetPoint(idx, h_al.R_1_N.y, h_al.R_1_F.y - h_al.R_1_N.y);
+		}
 
 		th_x_diffLR->Fill(k.th_x_R - k.th_x_L);
 		th_y_diffLR->Fill(k.th_y_R - k.th_y_L);
@@ -1824,8 +1843,17 @@ int main(int argc, char **argv)
 	p_x_vs_y_R_N_noal->Write();
 	p_x_vs_y_R_F_noal->Write();
 
+	h_x_L_diffFN_vs_x_L_N->Write();
+	h_x_R_diffFN_vs_x_R_N->Write();
+
 	h_y_L_diffFN_vs_y_L_N->Write();
 	h_y_R_diffFN_vs_y_R_N->Write();
+
+	g_x_L_diffFN_vs_x_L_N->Write();
+	g_x_R_diffFN_vs_x_R_N->Write();
+
+	g_y_L_diffFN_vs_y_L_N->Write();
+	g_y_R_diffFN_vs_y_R_N->Write();
 
 	h_y_L_ratioFN_vs_y_L_N->Write();
 	h_y_R_ratioFN_vs_y_R_N->Write();
