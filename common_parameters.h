@@ -78,4 +78,13 @@ void Environment::InitNominal()
 
 void Environment::UseMatchedOptics()
 {
+	printf(">> Environment::UseMatchedOptics\n");
+
+	printf("    Using optics sent by Frici on 14 July 2016\n");
+
+	v_x_L_1_N = -3.9327440533E+00; L_x_L_1_N = 6.6484397130E+03; v_y_L_1_N = -3.1010383878E+00; L_y_L_1_N = 1.6590416176E+04;
+	v_x_L_1_F = -4.1178925949E+00; L_x_L_1_F = 4.5145464921E+03; v_y_L_1_F = -3.3186332247E+00; L_y_L_1_F = 1.4651383137E+04;
+
+	v_x_R_1_N = -3.9727946789E+00; L_x_R_1_N = 6.4784687349E+03; v_y_R_1_N = -2.9680450508E+00; L_y_R_1_N = 1.7051970926E+04;
+	v_x_R_1_F = -4.0644630203E+00; L_x_R_1_F = 4.2057274961E+03; v_y_R_1_F = -3.2222339103E+00; L_y_R_1_F = 1.5270130135E+04;
 }
