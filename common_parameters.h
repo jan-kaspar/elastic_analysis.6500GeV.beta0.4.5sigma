@@ -1,5 +1,7 @@
 void Environment::InitNominal()
 {
+	printf(">> Environment::InitNominal\n");
+
 	// beam momentum (GeV)
 	p = p_L = p_R = 6500.;
 
