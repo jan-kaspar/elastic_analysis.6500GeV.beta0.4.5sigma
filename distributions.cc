@@ -516,7 +516,6 @@ int main(int argc, char **argv)
 	TH1D *h_ta_th_x_L = new TH1D("h_ta_th_x_L", ";#tau_{x}^{L} - #theta_{x}^{L}", 100, 0., 0.);
 	TH1D *h_ta_th_x = new TH1D("h_ta_th_x", ";#tau_{x} - #theta_{x}", 100, 0., 0.);
 	TH1D *h_ta_x_diffLR = new TH1D("h_ta_x_diffLR", ";#Delta^{R-L} #tau_{x}", 100, 0., 0.);
-	*/
 
 	TH1D *h_ta_y_R = new TH1D("h_ta_y_R", ";#tau_{y}^{R}", 100, -600E-6, +600E-6);
 	TH1D *h_ta_y_L = new TH1D("h_ta_y_L", ";#tau_{y}^{L}", 100, -600E-6, +600E-6);
@@ -525,6 +524,7 @@ int main(int argc, char **argv)
 	TH1D *h_ta_th_y_R = new TH1D("h_ta_th_y_R", ";#tau_{y}^{R} - #theta_{y}^{R}", 100, 0., 0.);
 	TH1D *h_ta_th_y_L = new TH1D("h_ta_th_y_L", ";#tau_{y}^{L} - #theta_{y}^{L}", 100, 0., 0.);
 	TH1D *h_ta_y_diffLR = new TH1D("h_ta_y_diffLR", ";#Delta^{R-L} #tau_{y}", 100, 0., 0.);
+	*/
 
 	TProfile *h_ta_y_vs_th_y = new TProfile("h_ta_y_vs_th_y", ";#theta_{y};#tau_{y}", 100, -600E-6, +600E-6); h_ta_y_vs_th_y->SetLineColor(1);
 	TProfile *h_ta_y_L_vs_th_y_L = new TProfile("h_ta_y_L_vs_th_y_L", ";#theta_{y}^{L};#tau_{y}^{L}", 100, -600E-6, +600E-6); h_ta_y_L_vs_th_y_L->SetLineColor(2);

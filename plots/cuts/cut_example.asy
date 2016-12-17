@@ -9,7 +9,7 @@ string dataset = "DS1";
 string diagonal = "45t_56b";
 
 //int cuts[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
-int cuts[] = { 1, 2, 3, 6 };
+int cuts[] = { 1, 2, 4, 6 };
 
 real scale_x[] = { 1e6, 1e6, 1e6, 1e6, 1e0, 1e0, 1e6, 1e6 };
 real scale_y[] = { 1e6, 1e6, 1e0, 1e0, 1e0, 1e0, 1e0, 1e0 };
@@ -26,6 +26,9 @@ real lim_y_high[] = { +500, -200, +0.8, +0.8, +0.5, -0.2, +0.2, +4 };
 
 for (int ci : cuts.keys)
 {
+	if (ci == 2)
+		NewRow();
+
 	int cut = cuts[ci];
 	int idx = cut - 1;
 
@@ -33,7 +36,7 @@ for (int ci : cuts.keys)
 	
 	NewPad(label_x[idx], label_y[idx]);
 	scale(Linear, Linear, Log);
-	string objC = format("elastic cuts/cut %i", cut) + format("/plot_after_cq%i", cut);
+	string objC = format("elastic cuts/cut %i", cut) + format("/plot_before_cq%i", cut);
 	draw(scale(scale_x[idx], scale_y[idx]), RootGetObject(f, objC+"#0"), "p,d0,bar");
 	draw(scale(scale_x[idx], scale_y[idx]), RootGetObject(f, objC+"#1"));
 	draw(scale(scale_x[idx], scale_y[idx]), RootGetObject(f, objC+"#2"));
