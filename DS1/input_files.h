@@ -13,7 +13,8 @@ void InitInputFiles()
 
 	input_files.clear();
 
-	// 2016_04_20_fill4828
+	// calibration run after TS2:
+	//   2016_04_20_fill4828
 
 	std::string prefix = "root://eostotem.cern.ch//eos/totem/user/j/jkaspar/reco/alignment_sr/";
 
