@@ -26,11 +26,11 @@ void Init_base()
 	alSrc.SetAlignmentB(atConstant);
 	alSrc.SetAlignmentC(atConstant);
 
-	alSrc.cnst.a_L_1_F = -25E-3; alSrc.cnst.b_L_1_F = 2.92; alSrc.cnst.c_L_1_F = +150E-3;
-	alSrc.cnst.a_L_1_N = -21E-3; alSrc.cnst.b_L_1_N = 3.40; alSrc.cnst.c_L_1_N =    0E-3;
+	alSrc.cnst.a_L_1_F = 0E-3; alSrc.cnst.b_L_1_F = 0; alSrc.cnst.c_L_1_F = 0E-3;
+	alSrc.cnst.a_L_1_N = 0E-3; alSrc.cnst.b_L_1_N = 0; alSrc.cnst.c_L_1_N = 0E-3;
                                                                        
-	alSrc.cnst.a_R_1_N = +20E-3; alSrc.cnst.b_R_1_N = 3.40; alSrc.cnst.c_R_1_N = +350E-3;
-	alSrc.cnst.a_R_1_F = +22E-3; alSrc.cnst.b_R_1_F = 2.41; alSrc.cnst.c_R_1_F = +500E-3;
+	alSrc.cnst.a_R_1_N = 0E-3; alSrc.cnst.b_R_1_N = 0; alSrc.cnst.c_R_1_N = 0E-3;
+	alSrc.cnst.a_R_1_F = 0E-3; alSrc.cnst.b_R_1_F = 0; alSrc.cnst.c_R_1_F = 0E-3;
 	
 	alignmentSources.push_back(alSrc);
 
